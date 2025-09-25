@@ -13,6 +13,8 @@ namespace WebAppPL.Data
         }
         public virtual DbSet<Author> Authors { get; set; }
         public virtual DbSet<Biography> Biographies { get; set; }
+        public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<Employee> Employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -20,7 +22,15 @@ namespace WebAppPL.Data
                 .HasOne(a => a.Biography)
                 .WithOne(b => b.Author)
                 .HasForeignKey<Biography>(b => b.AuthorId);
+
+            builder.Entity<Company>()
+                .HasMany(c => c.Employees)
+                .WithOne(e => e.Company)
+                .HasForeignKey(e => e.CompanyId);
             base.OnModelCreating(builder);
+
+            
         }
+
     }
 }
