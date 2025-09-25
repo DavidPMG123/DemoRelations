@@ -8,6 +8,7 @@ namespace DAL.Data.Entities
 {
     public abstract class BaseEntity
     {
+        //kkk
         public int Id { get; set; }
     }
 }
